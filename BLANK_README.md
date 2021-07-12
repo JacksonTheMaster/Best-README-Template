@@ -1,149 +1,250 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@JacksonTheMaster 
-JacksonTheMaster
-/
-Best-README-Template
-Template
-forked from othneildrew/Best-README-Template
-0
-07.8k
-Code
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-Best-README-Template
-/
-BLANK_README.md
-in
-master
- 
-
-Spaces
-
-2
-
-Soft wrap
-1
 <!--
-2
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-3
-*** that would make this better, please fork the repo and create a pull request
-4
-*** or simply open an issue with the tag "enhancement".
-5
-*** Thanks again! Now go create something AMAZING! :D
-6
-***
-7
-***
-8
-***
-9
-*** To avoid retyping too much info. Do a search and replace for the following:
-10
-*** github_username, repo_name, twitter_handle, email, project_title, project_description
-11
+
 -->
-12
-​
-13
-​
-14
-​
-15
+
+
+
 <!-- PROJECT SHIELDS -->
-16
 <!--
-17
 *** I'm using markdown "reference style" links for readability.
-18
 *** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-19
 *** See the bottom of this document for the declaration of the reference variables
-20
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-21
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
-22
 -->
-23
 [![Contributors][contributors-shield]][contributors-url]
-24
 [![Forks][forks-shield]][forks-url]
-25
 [![Stargazers][stars-shield]][stars-url]
-26
 [![Issues][issues-shield]][issues-url]
-27
 [![MIT License][license-shield]][license-url]
-28
 [![LinkedIn][linkedin-shield]][linkedin-url]
-29
-​
-30
-​
-31
-​
-32
+
+
+
 <!-- PROJECT LOGO -->
-33
 <br />
-34
 <p align="center">
-35
-  <a href="https://github.com/github_username/repo_name">
-36
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-37
+  <a href="https://www.hetzner.com/assets/Uploads/icon-circle-cloud.svg">
+    <img src="https://www.hetzner.com/assets/Uploads/icon-circle-cloud.svg" alt="Logo" width="80" height="80">
   </a>
-38
-​
-39
-  <h3 align="center">project_title</h3>
-40
-​
-41
+
+  <h3 align="center">elasticp</h3>
+
   <p align="center">
-42
-    project_description
-43
+    For Detailed Documentation see our website:
     <br />
-44
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
-45
+    <a href="https://jmg-it.de/docs"><strong>Explore the docs »</strong></a>
     <br />
-Keine ausgewählt
-Attach files by dragging & dropping, selecting or pasting them.
-@JacksonTheMaster
-Commit changes
-Commit summary
-Create BLANK_README.md
-Optional extended description
-Add an optional extended description…
- Commit directly to the master branch.
- Create a new branch for this commit and start a pull request. Learn more about pull requests.
- 
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+    <br />
+    <a href="https://github.com/jacksonthemaster/elasticip/src">View Files</a>
+    ·
+    <a href="https://github.com/jacksonthemaster/elasticip/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/jacksonthemaster/elasticip/issues">Request Feature</a>
+  </p>
+</p>
+
+
+
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
+  </ol>
+</details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+
+
+
+Enough struggle with Dyndns, hostnames like jtm.dnsmonster.someweirdTLD are evil and bad and not routable in A records.
+So I present this:
+
+
+With elasticip, getting your own Public IP address has never been easier. 
+
+Basically, we use a Cloud-providers IP and route it to us, which costs me 2,96€ /3,51$ a month. 😀 😃 😄 😁 @ RIPE :)
+
+Btw, I have no Idea if this Is legal. I hope no one will raid down my doors for this, but maybe some Amazon EC2 manager will. Who knows.
+
+
+
+In order for this to work, follow this:
+
+### Built With
+
+* [Python](Python)
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+To get a local copy up and running follow these simple steps.
+
+### Prerequisites###
+
+-A cloud instance from a hoster (hetzner, linode, amazon ec2, hetzner, whatever u prefer)
+
+-Running ubuntu (debian not tested- feel free to do so, probably works)
+
+
+-A static ip from your cloud provider configured on that machine 
+
+
+-A registerd Cloudflare account
+
+
+-A working dyndns solution; i recommend <a href="www.dnsomatic.com">www.dnsomatic.com</a> 
+
+
+-A DEFINITE A record on your Domain beeing updated by DDNS, e.g DNSomatic ⬆️
+
+
+
+definite = if elasticip searches for dynamic.contoso.net, it should only find one record. If you set up your A records in some weird way, you should change your ddns updated A record to MYVERYSPECIFICRECORD12345.contoso.net or sth like that. You get the spirit.
+
+Update your system
+  ```sh
+  sudo apt-get update
+  ```
+Install NGINX
+  Update your system
+  ```sh
+  sudo apt-get install nginx
+  ```
+
+### Installation
+
+1. Clone the repo
+   ```sh
+
+    mkdir /var/lib/elasticip
+
+    git clone https://github.com/jacksonthemaster/elasticip.git /var/lib/elasticip
+   ```
+2. Edit req.py
+   ```sh
+   cd /var/lib/elasticip/src
+
+   nano req.py
+
+   for info, see below.
+   ```
+3. setup cron schedule (this sets it up for every minute, which should be just fine.)
+   ```sh
+   crontab -e 
+   first use: 
+   1
+
+   ADD THIS LINE;
+
+   * * * * * sudo /bin/bash /var/lib/elasticip/src/get.sh > /var/lib/elasticip/src/cronlog.yml
+
+    close with ctrl+s & ctrl+x
+
+    wait (you can check time with command: date)
+   ```
+
+   
+Make sure to replace the cloudflare account data spaces in /elasticip/src/req.py with your own.
+
+
+
+
+ ```sh
+ ZONE-ID: google "how to get cloudflare Zone ID, it's easy.
+ url: 'https://api.cloudflare.com/client/v4/zones/Cloudflare-ZONE-ID/dns_records?type=A&name=DEFINITE_A_RECORD.DOMAIN.TLD&type=&page=1&per_page=20&order=type&direction=desc&match=all'
+ bearer: A Cloudflare accsess Token for your account (settings page, tokens. If unsure, use origin key.)
+ email: your cloudflare registerd Email.
+   ```
+
+This data can be obtained in many ways, Zone ID and Token probably beeing the hardest to google. I leave this on you, but feel free to contact me.
+
+<!-- USAGE EXAMPLES -->
+## Usage
+none, sorry guys :uwu
+
+
+<!-- ROADMAP -->
+## Roadmap
+
+none, sorry guys :uwu
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Jacky - [jlangisch](https://twitter.com/jlangisch) - jacky@jmg-it.de
+
+Project Link: [https://github.com/jacksonthemaster/elasticip (https://github.com/jacksonthemaster/elasticip)
+
+
+
+<!-- ACKNOWLEDGEMENTS -->
+## Acknowledgements
+
+* [My Database Admin for listening to me while coding this](My Database Admin for listening to me while coding this)
+
+
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/jacksonthemaster/repo.svg?style=for-the-badge
+[contributors-url]: https://github.com/jacksonthemaster/repo/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/jacksonthemaster/repo.svg?style=for-the-badge
+[forks-url]: https://github.com/jacksonthemaster/repo/network/members
+[stars-shield]: https://img.shields.io/github/stars/jacksonthemaster/repo.svg?style=for-the-badge
+[stars-url]: https://github.com/jacksonthemaster/repo/stargazers
+[issues-shield]: https://img.shields.io/github/issues/jacksonthemaster/repo.svg?style=for-the-badge
+[issues-url]: https://github.com/jacksonthemaster/repo/issues
+[license-shield]: https://img.shields.io/github/license/jacksonthemaster/repo.svg?style=for-the-badge
+[license-url]: https://github.com/jacksonthemaster/repo/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/jacksonthemaster
