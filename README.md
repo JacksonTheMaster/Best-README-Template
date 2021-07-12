@@ -3,6 +3,11 @@
 *** that would make this better, please fork the repo and create a pull request
 *** or simply open an issue with the tag "enhancement".
 *** Thanks again! Now go create something AMAZING! :D
+***
+***
+***
+*** To avoid retyping too much info. Do a search and replace for the following:
+*** jacksonthemaster, elasticip, twitter_handle, jacky@jmg-it.de, elasticp, project_description
 -->
 
 
@@ -27,23 +32,23 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://www.hetzner.com/assets/Uploads/icon-circle-cloud.svg">
+    <img src="https://www.hetzner.com/assets/Uploads/icon-circle-cloud.svg" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">elasticp</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    For Detailed Documentation see our website:
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://jmg-it.de/docs"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://github.com/jacksonthemaster/elasticip/src">View Files</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/jacksonthemaster/elasticip/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/jacksonthemaster/elasticip/issues">Request Feature</a>
   </p>
 </p>
 
@@ -51,7 +56,7 @@
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
-  <summary>Table of Contents</summary>
+  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
@@ -80,74 +85,122 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
+Enough struggle with Dyndns, hostnames like jtm.dnsmonster.someweirdTLD are evil and bad and not routable in A records.
+So I present this:
 
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
+
+With elasticip, getting your own Public IP address has never been easier. 
+
+Basically, we use a Cloud-providers IP and route it to us, which costs me 2,96€ /3,51$ a month. 😀 😃 😄 😁 @ RIPE :)
+
+Btw, I have no Idea if this Is legal. I hope no one will raid down my doors for this, but maybe some Amazon EC2 manager will. Who knows.
+
+
+
+In order for this to work, follow this:
 
 ### Built With
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
+* [Python](Python)
 
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+To get a local copy up and running follow these simple steps.
 
-### Prerequisites
+### Prerequisites###
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+-A cloud instance from a hoster (hetzner, linode, amazon ec2, hetzner, whatever u prefer)
+
+-Running ubuntu (debian not tested- feel free to do so, probably works)
+
+
+-A static ip from your cloud provider configured on that machine 
+
+
+-A registerd Cloudflare account
+
+
+-A working dyndns solution; i recommend <a href="www.dnsomatic.com">www.dnsomatic.com</a> 
+
+
+-A DEFINITE A record on your Domain beeing updated by DDNS, e.g DNSomatic ⬆️
+
+
+
+definite = if elasticip searches for dynamic.contoso.net, it should only find one record. If you set up your A records in some weird way, you should change your ddns updated A record to MYVERYSPECIFICRECORD12345.contoso.net or sth like that. You get the spirit.
+
+Update your system
   ```sh
-  npm install npm@latest -g
+  sudo apt-get update
+  ```
+Install NGINX
+  Update your system
+  ```sh
+  sudo apt-get install nginx
   ```
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+
+    mkdir /var/lib/elasticip
+
+    git clone https://github.com/jacksonthemaster/elasticip.git /var/lib/elasticip
    ```
-3. Install NPM packages
+2. Edit req.py
    ```sh
-   npm install
+   cd /var/lib/elasticip/src
+
+   nano req.py
+
+   for info, see below.
    ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
+3. setup cron schedule (this sets it up for every minute, which should be just fine.)
+   ```sh
+   crontab -e 
+   first use: 
+   1
+
+   ADD THIS LINE;
+
+   * * * * * sudo /bin/bash /var/lib/elasticip/src/get.sh > /var/lib/elasticip/src/cronlog.yml
+
+    close with ctrl+s & ctrl+x
+
+    wait (you can check time with command: date)
    ```
 
+   
+Make sure to replace the cloudflare account data spaces in /elasticip/src/req.py with your own.
 
+
+
+
+ ```sh
+ ZONE-ID: google "how to get cloudflare Zone ID, it's easy.
+ url: 'https://api.cloudflare.com/client/v4/zones/Cloudflare-ZONE-ID/dns_records?type=A&name=DEFINITE_A_RECORD.DOMAIN.TLD&type=&page=1&per_page=20&order=type&direction=desc&match=all'
+ bearer: A Cloudflare accsess Token for your account (settings page, tokens. If unsure, use origin key.)
+ email: your cloudflare registerd Email.
+   ```
+
+This data can be obtained in many ways, Zone ID and Token probably beeing the hardest to google. I leave this on you, but feel free to contact me.
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
+none, sorry guys :uwu
 
 
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
-
+none, sorry guys :uwu
 
 
 <!-- CONTRIBUTING -->
@@ -173,25 +226,17 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Jacky - [jlangisch](https://twitter.com/jlangisch) - jacky@jmg-it.de
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/jacksonthemaster/elasticip (https://github.com/jacksonthemaster/elasticip)
 
 
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
+
+* [My Database Admin for listening to me while coding this](My Database Admin for listening to me while coding this)
+
 
 
 
@@ -199,16 +244,15 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/jacksonthemaster/repo.svg?style=for-the-badge
+[contributors-url]: https://github.com/jacksonthemaster/repo/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/jacksonthemaster/repo.svg?style=for-the-badge
+[forks-url]: https://github.com/jacksonthemaster/repo/network/members
+[stars-shield]: https://img.shields.io/github/stars/jacksonthemaster/repo.svg?style=for-the-badge
+[stars-url]: https://github.com/jacksonthemaster/repo/stargazers
+[issues-shield]: https://img.shields.io/github/issues/jacksonthemaster/repo.svg?style=for-the-badge
+[issues-url]: https://github.com/jacksonthemaster/repo/issues
+[license-shield]: https://img.shields.io/github/license/jacksonthemaster/repo.svg?style=for-the-badge
+[license-url]: https://github.com/jacksonthemaster/repo/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+[linkedin-url]: https://linkedin.com/in/jacksonthemaster
